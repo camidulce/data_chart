@@ -1,0 +1,263 @@
+<!DOCTYPE HTML>
+<!--
+
+-->
+<html>
+	<head>
+		<title>Charts</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.dropotron.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-wide.css" />
+		</noscript>
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+		        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>My first column chart by Highcharts</title>
+        <!-- 1. Add JQuery and Highcharts in the head of your page -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+
+        <!-- 2. You can add print and export feature by adding this line -->
+        <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+
+        <!-- 3. Add the JavaScript with the Highchart options to initialize the chart -->
+        <script type="text/javascript">
+        jQuery(document).ready(function() {
+
+            var options = {
+                chart: {
+                    renderTo: 'container',
+                    type: 'column'
+                },
+                title: {
+                    text: 'Some Economic Indicators'
+                },
+                subtitle: {
+                    text: '2014 Q1-Q2'
+                },
+                xAxis: {
+                    categories: []
+                },
+                yAxis: {
+                    title: {
+                        text: 'US$'
+                    }
+                },
+                series: []
+            };
+            // JQuery function to process the csv data
+            $.get('ec2.csv', function(data) {
+                // Split the lines
+                var lines = data.split('\n');
+                $.each(lines, function(lineNo, line) {
+                    var items = line.split(',');
+
+                    // header line contains names of categories
+                    if (lineNo == 0) {
+                        $.each(items, function(itemNo, item) {
+                            //skip first item of first line
+                            if (itemNo > 0) options.xAxis.categories.push(item);
+                        });
+                    }
+
+                    // the rest of the lines contain data with their name in the first position
+                    else {
+                        var series = {
+                            data: []
+                        };
+                        $.each(items, function(itemNo, item) {
+                            if (itemNo == 0) {
+                                series.name = item;
+                            } else {
+                                series.data.push(parseFloat(item));
+                            }
+                        });
+
+                        options.series.push(series);
+
+                    }
+
+                });
+                //putting all together and create the chart
+                var chart = new Highcharts.Chart(options);
+            });
+
+        });
+        </script>
+
+
+	</head>
+	<body>
+
+		<!-- Header -->
+			<div id="header">
+								<!-- Nav -->
+					<nav id="nav">
+
+					</nav>
+
+			</div>
+
+		<!-- Banner -->
+			<section id="banner">
+				<header>
+					<h2>The Story: <em>Charting data using HighCharts <a href="http://www.highcharts.com/">*</a></em></h2>
+					<a href="#" class="button">See More</a>
+				</header>
+			</section>
+
+				<!-- Gigantic Heading -->
+			<section class="wrapper style2">
+				<div class="container">
+					<header class="major">
+						<!-- 3. Add the container -->
+        		<div id="container" style="width: 600px; height: 400px; margin: 0 auto"></div>
+						<br></br>
+						<p>Below is a little more data to accompany this journey...</p>
+					</header>
+				</div>
+			</section>
+
+		<!-- Highlights -->
+			<section class="wrapper style1">
+				<div class="container">
+					<div class="row 200%">
+						<section class="4u 12u(2)">
+							<div class="box highlight">
+								<i class="icon major fa-paper-plane"></i>
+								<h3>This Is Important.</h3>
+								<p>% Chart here</p>
+							</div>
+						</section>
+						<section class="4u 12u(2)">
+							<div class="box highlight">
+								<i class="icon major fa-pencil"></i>
+								<h3>Also Important</h3>
+								<p>Revenue Chart here.</p>
+							</div>
+						</section>
+						<section class="4u 12u(2)">
+							<div class="box highlight">
+								<i class="icon major fa-wrench"></i>
+								<h3>Probably Important</h3>
+								<p>Comparison with Europe Chart here.</p>
+							</div>
+						</section>
+					</div>
+				</div>
+			</section>
+
+		<!-- Gigantic Heading -->
+			<section class="wrapper style2">
+				<div class="container">
+					<header class="major">
+						<h2>Here is the chart that makes the point</h2>
+						<p>With a small paragraph to explain why this journey.</p>
+					</header>
+				</div>
+			</section>
+
+		<!-- Posts -->
+			<section class="wrapper style1">
+				<div class="container">
+					<div class="row">
+						<section class="6u 12u(2)">
+							<div class="box post">
+								<a href="#" class="image left"><img src="images/pic01.jpg" alt="" /></a>
+								<div class="inner">
+									<h3>The First: Romania</h3>
+									<p>Here is a short (funny) paragraph about why I left.</p>
+								</div>
+							</div>
+						</section>
+						<section class="6u 12u(2)">
+							<div class="box post">
+								<a href="#" class="image left"><img src="images/pic02.jpg" alt="" /></a>
+								<div class="inner">
+									<h3>The Second: Paris, France</h3>
+									<p>Fun and work in the city of light.</p>
+								</div>
+							</div>
+						</section>
+					</div>
+					<div class="row">
+						<section class="6u 12u(2)">
+							<div class="box post">
+								<a href="#" class="image left"><img src="images/pic03.jpg" alt="" /></a>
+								<div class="inner">
+									<h3>The Third: Chapel Hill (NC)</h3>
+									<p>Graduate school and family life.</p>
+								</div>
+							</div>
+						</section>
+						<section class="6u 12u(2)">
+							<div class="box post">
+								<a href="#" class="image left"><img src="images/pic04.jpg" alt="" /></a>
+								<div class="inner">
+									<h3>The Fourth: McLean (VA)</h3>
+									<p>Getting back to city life, from a suburban perspective.</p>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</section>
+
+		<!-- CTA -->
+			<section id="cta" class="wrapper style3">
+				<div class="container">
+					<header>
+						<h2>Are you ready to hear more?</h2>
+						<a href="#" class="button">See below</a>
+					</header>
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<div id="footer">
+				<div class="container">
+					<div class="row">
+						<section class="3u 6u(2) 12u$(3)">
+							<h3>Bullet points about road blocks in charting data?</h3>
+
+						</section>
+						<section class="3u 6u$(2) 12u$(3)">
+
+						</section>
+						<section class="6u 12u(2)">
+							<h3>A conclusion?</h3>
+
+						</section>
+					</div>
+				</div>
+
+				<!-- Icons -->
+					<ul class="icons">
+						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+
+						<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
+						<li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+
+					</ul>
+
+				<!-- Copyright -->
+					<div class="copyright">
+						<ul class="menu">
+							<li>@camelia</li><li>simplicity is the absolute abstration...</a></li>
+						</ul>
+					</div>
+
+			</div>
+
+	</body>
+</html>
