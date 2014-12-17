@@ -59,6 +59,7 @@
             $.get('ec2.csv', function(data) {
                 // Split the lines
                 var lines = data.split('\n');
+                lines.pop()
                 $.each(lines, function(lineNo, line) {
                     var items = line.split(',');
 
