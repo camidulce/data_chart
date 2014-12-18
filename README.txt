@@ -24,6 +24,7 @@ Technologies used
   html and css, sass
   Icons: Font Awesome (fortawesome.github.com/Font-Awesome)
   Used data from the following websites: Census and Federal Reserve Bank St. Louis
+  Used Federal Reserve Bank St. Louis API/ charted internet usage (not used here though)
 
 Future Plans:
 
