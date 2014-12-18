@@ -25,7 +25,7 @@
         <!-- 1. Add JQuery and Highcharts in the head of your page -->
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
         <script src="http://code.highcharts.com/highcharts.js"></script>
-
+        <script src="http://code.highcharts.com/highcharts-more.js"></script>
         <!-- 2. You can add print and export feature by adding this line -->
         <script src="http://code.highcharts.com/modules/exporting.js"></script>
 
@@ -40,7 +40,7 @@
                     type: 'column'
                 },
                 title: {
-                    text: 'Some Economic Indicators'
+                    text: '...Pure Economics...'
                 },
                 subtitle: {
                     text: '2014 Q1-Q2'
@@ -102,7 +102,8 @@
             var options = {
                 chart: {
                     renderTo: 'containerperc',
-                    type: 'line'
+                    type: 'bubble',
+                    zoomType: 'xy'
                 },
                 title: {
                     text: 'Some % for a better picture'
@@ -314,6 +315,80 @@
         });
         </script>
 
+                <!-- 3.5 Add the JavaScript with the Highchart options to initialize the chart -->
+        <script type="text/javascript">
+        jQuery(document).ready(function() {
+
+            var options = {
+                chart: {
+                    renderTo: 'containernet',
+                    type: 'spline'
+                },
+                title: {
+                    text: 'How many of us are connected?'
+                },
+                subtitle: {
+                    text: '1990 - 2013'
+                },
+                xAxis: {
+                    categories: []
+                },
+                yAxis: {
+                    title: {
+                        text: 'Percentage of total population (%)'
+                    }
+                },
+                legend: {
+                    align: 'right',
+                    reversed: 'true',
+                    verticalAlign: 'middle',
+                    layout: 'vertical',
+                    x: 0,
+                    y: 0
+                },
+                series: []
+            };
+            // JQuery function to process the csv data
+            $.get('ec4.csv', function(data) {
+                // Split the lines
+                var lines = data.split('\n');
+                lines.pop()
+                $.each(lines, function(lineNo, line) {
+                    var items = line.split(',');
+
+                    // header line contains names of categories
+                    if (lineNo == 0) {
+                        $.each(items, function(itemNo, item) {
+                            //skip first item of first line
+                            if (itemNo > 0) options.xAxis.categories.push(item);
+                        });
+                    }
+
+                    // the rest of the lines contain data with their name in the first position
+                    else {
+                        var series = {
+                            data: []
+                        };
+                        $.each(items, function(itemNo, item) {
+                            if (itemNo == 0) {
+                                series.name = item;
+                            } else {
+                                series.data.push(parseFloat(item));
+                            }
+                        });
+
+                        options.series.push(series);
+
+                    }
+
+                });
+                //putting all together and create the chart
+                var chart = new Highcharts.Chart(options);
+            });
+
+        });
+        </script>
+
 	</head>
 	<body>
 
@@ -329,8 +404,8 @@
 		<!-- Banner -->
 			<section id="banner">
 				<header>
-					<h2>The Story: <em>Charting data using HighCharts <a href="http://www.highcharts.com/">*</a></em></h2>
-					<a href="#" class="button">See More</a>
+					<h2>The Story: <em>Charting data using HighCharts <a href="http://www.highcharts.com/"></a></em></h2>
+					<a href="#work" class="button">See More</a>
 				</header>
 			</section>
 
@@ -338,8 +413,10 @@
 			<section class="wrapper style2">
 				<div class="container">
 					<header class="major">
+            <h3> On-line Media Changes the Course of Events Everywhere </h3>
 						<!-- 3. Add the container -->
-        		<div id="container" style="width: 600px; height: 400px; margin: 0 auto"></div>
+            <div id="containernet" style="width: 600px; height: 400px; margin: 0 auto"></div>
+
 						<br></br>
 						<p>Below is a little more data to accompany this journey...</p>
 					</header>
@@ -353,21 +430,21 @@
 						<section class="4u 12u(2)">
 							<div class="box highlight">
 								<i class="icon major fa-paper-plane"></i>
-								<h3>This Is Important.</h3>
+								<h3>Rates: Job Growth and Taxes</h3>
 								<p><div id="containerperc" style="min-width: 310px; height: 400px; margin: 0 auto"></div></p>
 							</div>
 						</section>
 						<section class="4u 12u(2)">
 							<div class="box highlight">
 								<i class="icon major fa-pencil"></i>
-								<h3>Also Important</h3>
+								<h3>Income Distribution</h3>
 								<p><div id="containerarea" style="min-width: 310px; height: 400px; margin: 0 auto"></div></p>
 							</div>
 						</section>
 						<section class="4u 12u(2)">
 							<div class="box highlight">
 								<i class="icon major fa-wrench"></i>
-								<h3>Clarifying the Picture</h3>
+								<h3>A measure of Wealth: GDP per Capita</h3>
 								<p><div id="containeruseu" style="min-width: 310px; height: 400px; margin: 0 auto"></div></p>
 							</div>
 						</section>
@@ -377,12 +454,17 @@
 
 		<!-- Gigantic Heading -->
 			<section class="wrapper style2">
+        <article id="work">
 				<div class="container">
 					<header class="major">
-						<h2>Here is the chart that makes the point</h2>
-						<p>With a small paragraph to explain why this journey.</p>
+						<h3>Individual and Family Income</h3>
+            <div id="container" style="width: 600px; height: 400px; margin: 0 auto"></div>
+						<br></br>
+            <p>None of these were actually factors in my journey's decision process, but rather the cultural, educational and social opportunities.</p>
+
 					</header>
 				</div>
+      </article>
 			</section>
 
 		<!-- Posts -->
@@ -435,8 +517,8 @@
 			<section id="cta" class="wrapper style3">
 				<div class="container">
 					<header>
-						<h2>Are you ready to hear more?</h2>
-						<a href="#" class="button">See below</a>
+						<h2>May want to hear more?</h2>
+						<a href="mailto:camelia@eloquentix.com" class="button">Keep in Touch!</a>
 					</header>
 				</div>
 			</section>
@@ -446,14 +528,14 @@
 				<div class="container">
 					<div class="row">
 						<section class="3u 6u(2) 12u$(3)">
-							<h3>Bullet points about road blocks in charting data?</h3>
+							<h4>Conclusion: <br></br> The past three months were a fun journey ... thank you, guys...is today one of my 'turning the page' moments?</h4>
 
 						</section>
 						<section class="3u 6u$(2) 12u$(3)">
 
 						</section>
 						<section class="6u 12u(2)">
-							<h3>A conclusion?</h3>
+							<h6>Road blocks in charting data: <br></br>first, it was a ruby app, since I thought it is important to persist the data. However, after few trials and errors, I decided that my goal can be achieved by presenting the charts here. I used Foundation, Roo, pythin server to get over the ajax cross domain errors, played with APIs and finally with Highcharts.</h6>
 
 						</section>
 					</div>
@@ -461,11 +543,12 @@
 
 				<!-- Icons -->
 					<ul class="icons">
+            <article id="socialmedia">
 						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
 
 						<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
 						<li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
-
+            </article>
 					</ul>
 
 				<!-- Copyright -->
