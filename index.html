@@ -8,9 +8,8 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
-		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+
 		<script src="js/jquery.min.js"></script>
-		<script src="js/jquery.dropotron.min.js"></script>
 		<script src="js/skel.min.js"></script>
 		<script src="js/skel-layers.min.js"></script>
 		<script src="js/init.js"></script>
@@ -19,18 +18,19 @@
 			<link rel="stylesheet" href="css/style.css" />
 			<link rel="stylesheet" href="css/style-wide.css" />
 		</noscript>
-		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
-		        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+		    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
         <title>My first column chart by Highcharts</title>
-        <!-- 1. Add JQuery and Highcharts in the head of your page -->
+        <!-- 1. JQuery and Highcharts added in the head of page -->
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
         <script src="http://code.highcharts.com/highcharts.js"></script>
         <script src="http://code.highcharts.com/highcharts-more.js"></script>
-        <!-- 2. You can add print and export feature by adding this line -->
+        <!-- 2. Print and export chart  -->
         <script src="http://code.highcharts.com/modules/exporting.js"></script>
 
 
-        <!-- 3.1 Add the JavaScript with the Column Highchart options to initialize the chart -->
+        <!-- 3.1 Add the JavaScript with the Column Highchart option to initialize the chart -->
         <script type="text/javascript">
         jQuery(document).ready(function() {
 
@@ -41,6 +41,9 @@
                 },
                 title: {
                     text: '...Pure Economics...'
+                },
+                credits: {
+                enabled: false
                 },
                 subtitle: {
                     text: '2014 Q1-Q2'
@@ -95,7 +98,7 @@
 
         });
         </script>
-        <!-- 3.2 Add the JavaScript with the Line Highchart options to initialize the chart -->
+        <!-- 3.2 Add the JavaScript with the Bubble Highchart options to initialize the chart -->
         <script type="text/javascript">
         jQuery(document).ready(function() {
 
@@ -107,6 +110,9 @@
                 },
                 title: {
                     text: 'Some % for a better picture'
+                },
+                credits: {
+                enabled: false
                 },
                 subtitle: {
                     text: '2014 Q1-Q2'
@@ -174,6 +180,9 @@
                 },
                 title: {
                     text: 'A closer look at diversity'
+                },
+                credits: {
+                enabled: false
                 },
                 subtitle: {
                     text: '2014 Q1-Q2'
@@ -253,6 +262,9 @@
                 title: {
                     text: 'A Fresh Look at Europe'
                 },
+                credits: {
+                enabled: false
+                },
                 subtitle: {
                     text: '1990 - 2013'
                 },
@@ -326,6 +338,9 @@
                 },
                 title: {
                     text: 'How many of us are connected?'
+                },
+                credits: {
+                enabled: false
                 },
                 subtitle: {
                     text: '1990 - 2013'
