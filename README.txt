@@ -1,30 +1,34 @@
-Highcharts Journey
+Data Chart
 ==================
 
 Overview
 
-This is my journey in building skills to visualize data. I chose Highcharts for its simplicity and compared and contrasted it to D3.
-Highcharts Journey is a html/css single page application; it presents my data vizualization learning as my journey through various towns/ countries.
+This was my GA WDI final project: a data visualization single page app which charted data in places I lived. The project stemmed from Romania's presidential elections from last November, when one of the candidates(socialist) boasted that GDP rose, but presented only unilateral data. I plotted multiple data sets and compared data points in places I lived. The project evolved steadily in the week allocated to it and was dotted with constant decision making about what data and technologies to use in order to have a completed product by the end of the week.  
 
 Background
 
-My idea stems from the recent presidential elections in Romania and the power of internet/ social media which helped the democratic candidate win the elections (by a very small margin ~4%). Also, to get my classmates joke less about how 'great' communism is...
+The internet/social media helped the democratic candidate win the elections by a very small margin ~4%. The first data set I searched for was the internet usage and compare the data for US, France and Romania. 
+Another dataset I searched for was GDP/capita and compared the data for Romania with France and US.
+The GDP/capita chart helped my classmates joke less about how 'great' communism is... Click on the legend and look just at Romania; then add US and France data - the GDP growth for Romania is not as impresive any more.
 
 User Stories
 
 A user should be able to open the link http://camidulce.github.io/data_chart/ and browse the page, hover over charts' to see the tooltips and click the legend to remove/ add data points.
 
-Technologies used
+Technologies:
+
+The final product uses .csv files, JavaScript, jQuery, HTM & CSS.
+In the process I also used Ruby, Rails, Ruby gem Roo and looked into d3js.
 
   Highcharts
   jQuery (jquery.com)
-  javascript
-  Learned to import Data from .csv files and persist data in the ROR app - Gem Roo
+  JavaScript
+  Learned to import data from .csv files and persist data in the ROR app - Gem Roo
   Used Foundation for the ROR app
-  html and css, sass
+  HTML/CSS, SASS
   Icons: Font Awesome (fortawesome.github.com/Font-Awesome)
   Used data from the following websites: Census and Federal Reserve Bank St. Louis
-  Used Federal Reserve Bank St. Louis API/ charted internet usage (not used here though)
+  Used Federal Reserve Bank St. Louis API/ charted internet usage (ROR app)
 
 Future Plans:
 
