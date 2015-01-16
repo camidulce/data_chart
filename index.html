@@ -21,7 +21,7 @@
 
 		    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-        <title>My first column chart by Highcharts</title>
+        <title>A tale of three coutries with Highcharts</title>
         <!-- 1. JQuery and Highcharts added in the head of page -->
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
         <script src="http://code.highcharts.com/highcharts.js"></script>
@@ -250,7 +250,7 @@
         });
         </script>
 
-        <!-- 3.4 Add the JavaScript with the Highchart options to initialize the chart -->
+        <!-- 3.4a Add the JavaScript with the Highchart options to initialize the chart -->
         <script type="text/javascript">
         jQuery(document).ready(function() {
 
@@ -326,6 +326,84 @@
 
         });
         </script>
+
+                 <!-- 3.4b Add the JavaScript with the Highchart options to initialize the chart -->
+        <script type="text/javascript">
+        jQuery(document).ready(function() {
+
+            var options = {
+                chart: {
+                    renderTo: 'containergdpforecast',
+                    type: 'line'
+                },
+                title: {
+                    text: 'Three Countries: comparison'
+                },
+                credits: {
+                enabled: false
+                },
+                subtitle: {
+                    text: '09/2014-05/2015'
+                },
+                xAxis: {
+                    categories: []
+                },
+                yAxis: {
+                    title: {
+                        text: 'GDP growth (%)'
+                    }
+                },
+                legend: {
+                    align: 'right',
+                    reversed: 'true',
+                    verticalAlign: 'middle',
+                    layout: 'vertical',
+                    x: 0,
+                    y: 0
+                },
+                series: []
+            };
+            // JQuery function to process the csv data
+            $.get('gdpforecast.csv', function(data) {
+                // Split the lines
+                var lines = data.split('\n');
+                lines.pop()
+                $.each(lines, function(lineNo, line) {
+                    var items = line.split(',');
+
+                    // header line contains names of categories
+                    if (lineNo == 0) {
+                        $.each(items, function(itemNo, item) {
+                            //skip first item of first line
+                            if (itemNo > 0) options.xAxis.categories.push(item);
+                        });
+                    }
+
+                    // the rest of the lines contain data with their name in the first position
+                    else {
+                        var series = {
+                            data: []
+                        };
+                        $.each(items, function(itemNo, item) {
+                            if (itemNo == 0) {
+                                series.name = item;
+                            } else {
+                                series.data.push(parseFloat(item));
+                            }
+                        });
+
+                        options.series.push(series);
+
+                    }
+
+                });
+                //putting all together and create the chart
+                var chart = new Highcharts.Chart(options);
+            });
+
+        });
+        </script>
+
 
                 <!-- 3.5 Add the JavaScript with the Highchart options to initialize the chart -->
         <script type="text/javascript">
@@ -409,36 +487,83 @@
 
 		<!-- Header -->
 			<div id="header">
-								<!-- Nav -->
+		<!-- Nav -->
 					<nav id="nav">
 
 					</nav>
 
 			</div>
 
-		<!-- Banner -->
+		<!-- Banner <a href="#work" class="button">-->
 			<section id="banner">
 				<header>
-					<h2>The Story: <em>Charting data using HighCharts <a href="http://www.highcharts.com/"></a></em></h2>
-					<a href="#work" class="button">See More</a>
+					<h2>The Story: <em>A Tale of Three Countries.<a href="http://www.highcharts.com/"></a></em></h2>
+					<label class="btn btn--blue" for="modal-0">See More</a>
 				</header>
 			</section>
 
-				<!-- Gigantic Heading -->
+			<!-- Gigantic Heading -->
 			<section class="wrapper style2">
 				<div class="container">
 					<header class="major">
-            <h3> On-line Media Changes the Course of Events Everywhere </h3>
-						<!-- 3. Add the container -->
-            <div id="containernet" style="width: 600px; height: 400px; margin: 0 auto"></div>
-
+            <h3> Internet: Connectivity changed the course of the Romanian presidential election </h3>
+			<!-- 3. Add the container -->
+                     <div id="containernet" style="width: 600px; height: 400px; margin: 0 auto"></div>
 						<br></br>
-						<p>Below is a little more data to accompany this journey...</p>
+						<p>The connectivity and thus social media played a major role: democratic candidate's campaign was also fought online, with a massive mobilisation on Facebook and Twitter. After being elected, he became the first European politician to reach 1 million likes on Facebook, ahead of figures such as: Angela Merkel (898,444 likes), Nicolas Sarkozy ( 992,609 ), Francois Hollande ( 516,967 ), David Cameron, Sivio Berlusconi, Jose Manuel Barroso and Tony Blair. The likes jumped by <a href="http://www.foxcrawl.com/2014/11/18/klaus-johannis-breaks-facebook-record-becoming-first-european-politician-to-reach-1-million-likes-milestone/#sthash.ndRodhNW.dpuf" target="_blank">150,000 </a>in 1 1/2 days.</p>
 					</header>
 				</div>
 			</section>
 
-		<!-- Highlights -->
+            <!-- CTA -->
+            <section id="cta" class="wrapper style3">
+                <div class="container">
+                    <header>
+                        <h3>The economy was a big election issue. The democratic candidate accused the socialist one (current PM) of driving Romania into recession. The PM riposted with figures from the statistical office (ahead of publication) showing that GDP rose by 1.9% in the third quarter over the previous one. He managed to hide the budget deficit this time. The most pressing challenge for the government is the budget for 2015, since the figures for this year were massaged to look good for the election<a href="http://www.economist.com/news/europe/21633835-surprise-winner-may-mark-welcome-shift-pragmatic-policies-commonsense-victory" target="_blank"> (The Economist, 11/22/2014).</a></h3>
+
+                    </header>
+                </div>
+            </section>
+
+            <!-- Gigantic Heading -->
+            <section class="wrapper style2">
+            <article id="work">
+                <div class="container">
+                    <div class="row">
+                    <div class="4ua">
+                        <header class="major">
+                            <h3>A measure of a Healthy Economy: GDP growth</h3>
+                                <div id="containergdpforecast" style="width: 600px; height: 400px; margin: 0 auto"></div>
+                                <br></br>
+                                <p>The Gross Domestic Product (GDP) in Romania expanded 1.90 percent in the third quarter of 2014 over the previous quarter. GDP Growth Rate in Romania averaged 0.86 percent from 2000 until 2014, comparable to France. Not so spectacular when second quarter ended negative.</p>
+
+                        </header>
+                    </div>
+
+                    <div class="4ub">
+                        <header class="major">
+                            <h3>A measure of Wealth: GDP per Capita</h3>
+                                <div id="containeruseu" style="width: 600px; height: 400px; margin: 0 auto"></div>
+                                <br></br>
+                                <p>Again, comparison is important. The gross domestic product per capita in Romania (the value of all final goods and services produced within a country in a given year, divided by the average (or mid-year) population for the same year) is a fraction of France or US's GDP.</p>
+
+                        </header>
+                    </div>
+                    </div>
+                </div>
+            </article>
+            </section>
+
+		  <!-- CTA -->
+            <section id="cta" class="wrapper style3">
+                <div class="container">
+                    <header>
+                        <h3>Getting back to US: I looked for data at micro level and compared it for the two places where I lived: Chapel Hill, NC, and McLean, VA. Chapel Hill was definitively a 'bubble',  just to realize that McLean is probably a padded one.</h3>
+                    </header>
+                </div>
+            </section>
+
+        <!-- Highlights -->
 			<section class="wrapper style1">
 				<div class="container">
 					<div class="row 200%">
@@ -467,20 +592,15 @@
 				</div>
 			</section>
 
-		<!-- Gigantic Heading -->
-			<section class="wrapper style2">
-        <article id="work">
-				<div class="container">
-					<header class="major">
-						<h3>A measure of Wealth: GDP per Capita</h3>
-            <div id="containeruseu" style="width: 600px; height: 400px; margin: 0 auto"></div>
-						<br></br>
-            <p>None of these were actually factors in my journey's decision process, but rather the cultural, educational and social opportunities. Charts/ additional work to be completed soon.</p>
+            <!-- CTA -->
+            <section id="cta" class="wrapper style3">
+                <div class="container">
+                    <header>
+                        <h3>What actually matter to me more than anything? The investment in education.</h3>
 
-					</header>
-				</div>
-      </article>
-			</section>
+                    </header>
+                </div>
+            </section>
 
 		<!-- Posts -->
 			<section class="wrapper style1">
@@ -489,10 +609,11 @@
 						<section class="6u 12u(2)">
 							<div class="box post">
 								<a href="#" class="image left"><img src="images/pic01.jpg" alt="" /></a>
-								<div class="inner">
-									<h3>The First: Romania</h3>
-									<p>Here is a short (funny) paragraph about why I left.</p>
-								</div>
+                                <div class="inner">
+									<h3>First: Romania</h3>
+									<p>I left Romania thirsty for knowledge. First, I worked for a multinational in France, then I pursued a graduate degree in US.<label for="modal-1"> <u>WHY?</u></a></p>
+
+                                </div>
 							</div>
 						</section>
 						<section class="6u 12u(2)">
@@ -500,7 +621,7 @@
 								<a href="#" class="image left"><img src="images/pic02.jpg" alt="" /></a>
 								<div class="inner">
 									<h3>The Second: Paris, France</h3>
-									<p>Fun and work in the city of light.</p>
+									<p>Fun and work in the city of light. Education is here a priority. France and US spend almost the same % of GDP per capita for education: 22%. Note: their GDP in much higher then Romania's GDP. </p>
 								</div>
 							</div>
 						</section>
@@ -524,6 +645,20 @@
 								</div>
 							</div>
 						</section>
+
+                            <!-- Modal Sibiu-->
+                            <input class="modal-state" id="modal-1" type="checkbox" />
+                                <div class="modal">
+                                  <label class="modal__bg" for="modal-1"></label>
+                                  <div class="modal__inner">
+                                    <label class="modal__close" for="modal-1"></label>
+                                    <h3>Romania</h3>
+                                    <p><img src="images/pic01.jpg" alt="" />Education: I looked at the spending per student as % of GDP per capita. Romania has the lowest spending per stundent (only 18% of the GDP per capita), far below the EU average. Most other Eastern European countries spend between 23% and 27%, Slovenia reaching 32% (<a href="http://www.unicef.org/romania/Cost.Noninvest.web.pdf" target="_blank">UNICEF</a>).</p>
+                                  </div>
+                                </div>
+
+                            <!-- End Modal Sibiu-->
+
 					</div>
 				</div>
 			</section>
@@ -543,18 +678,31 @@
 				<div class="container">
 					<div class="row">
 						<section class="3u 6u(2) 12u$(3)">
-							<h4>Conclusion: <br></br> The past three months were a fun journey ... thank you, guys...is today one of my 'turning the page' moments?</h4>
+							<h4>Final Project Conclusion: <br></br> It evolved steadily in one week  and was dotted with constant pivoting due to limited accessible data sources.</h4>
 
 						</section>
 						<section class="3u 6u$(2) 12u$(3)">
 
 						</section>
 						<section class="6u 12u(2)">
-							<h6>Road blocks in charting data: <br></br>first, it was a ruby app, since I thought it is important to persist the data. However, after few trials and errors, I decided that my goal can be achieved by presenting the charts here. I used Foundation, Roo, python server to get over the ajax cross domain errors, played with APIs and finally with Highcharts.</h6>
+							<h6>Technologies: <br></br>First, it was a Ruby app: I thought it is important to persist the data in a database and be able to update it. However, after few days I pivoted to .csv files and a single-page presentation. In the process I used Ruby, Rails, Roo, APIs, then pivoted to HTML/CSS, .csv, python server to get over the ajax cross domain errors, jQuery and HighCharts.</h6>
 
 						</section>
 					</div>
 				</div>
+
+            <!-- Modal top story-->
+            <input class="modal-state" id="modal-0" type="checkbox" />
+                <div class="modal">
+                  <label class="modal__bg" for="modal-0"></label>
+                  <div class="modal__inner">
+                    <label class="modal__close" for="modal-0"></label>
+                    <h5>A Tale of Three Countries...</h5>
+                    </br><p>...is a data visualization single page app which charts data in places I lived. The project stems from Romania's presidential elections from last November, when the socialist candidate boasted that the GDP rose during the last quarter of his mandate as a PM. This view was unilateral, as most of his campaign. The intent of this project is to show the importance of data comparison. <br></br>Here, I plot multiple data sets and compare data points in places I lived, 'delicate arch' from raw data to its visual representation.</p>
+                  </div>
+                </div>
+
+            <!-- End Modal top story-->
 
 				<!-- Icons -->
 					<ul class="icons">
